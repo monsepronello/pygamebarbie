@@ -103,6 +103,13 @@ def mostrar_menu(ventana, fuente):
     ventana.blit(texto_salir, (horizontal / 2 - texto_salir.get_width() / 2, 350))
 
     pygame.display.flip()
+def mostrar_mensaje_final(ventana, fuente, mensaje):
+    ventana.fill(LILA)
+    texto = fuente.render(mensaje, True, FUCSIA)
+    ventana.blit(texto, (horizontal / 2 - texto.get_width() / 2, vertical / 2 - texto.get_height() / 2))
+    pygame.display.flip()    
+    pygame.time.delay(10000)
+   
 
 def main():
     pygame.init()
@@ -154,6 +161,14 @@ def main():
 
         if pelota.puntuacion >= 10 or pelota.puntuacion_ia >= 10:
             jugando = False
+        
+        if pelota.puntuacion >= 10:
+            mostrar_mensaje_final(ventana, fuente, "YOU WIN")
+            jugando = False
+        
+        if pelota.puntuacion_ia >= 10:
+            mostrar_mensaje_final(ventana, fuente, "GAME OVER")
+            jugando = False    
 
         for event in pygame.event.get():
             if event.type == QUIT:
